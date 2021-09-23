@@ -12,17 +12,50 @@
 		noiseEffect = 0,
 		planes = [],
 		animate,
+		trans = 0,
+		pricedata = [
+			{
+				title: 'Первый пакет»',
+				body: [
+					'Съемка 40 минут',
+					' 15 фотографий с цветокоррекцией и ретушью, где она необходима',
+					'Срок отдачи: 2 недели'
+				],
+				price: '2.000р.'
+			},
+			{
+				title: 'Второй пакет»',
+				body: [
+					'Съемка 40 минут',
+					' 25 фотографий с цветокоррекцией и ретушью, где она необходима',
+					'Макияж от профессионального визажиста',
+					'Срок отдачи: 2 недели'
+				],
+				price: '3.700р.'
+			},
+			{
+				title: 'Третий пакет»',
+				body: [
+					'Съемка 40 минут',
+					' 40-50 фотографий с цветокоррекцией и ретушью, где она необходима',
+					'Макияж от профессионального визажиста',
+					'Срок отдачи: 1 неделя'
+				],
+				price: '4.500р.'
+			}
+		],
 		photos = [
-			'20-08-31-12-01-02',
-			'20-08-31-12-16-04',
+			'2560_21-01-04-12-50-30',
+			'2560_21-01-04-12-23-33',
 			'20-09-06-13-12-33',
 			'20-09-06-13-24-23',
 			'20-09-06-13-22-33',
 			'20-09-06-13-25-23',
 			'20-08-31-12-24-31',
 			'20-08-31-12-33-54',
-			'2560_21-01-04-12-50-30',
-			'3'
+			'20-08-31-12-01-02'
+			// '20-08-31-12-16-04'
+			// '3'
 		];
 	// ==========================
 
@@ -51,13 +84,21 @@
 						type: '1f',
 						value: noiseAmp
 					},
-					noiseEffect: { name: 'uNoiseEffect', type: '1f', value: 0 },
+					noiseEffect: {
+						name: 'uNoiseEffect',
+						type: '1f',
+						value: 0
+					},
 					scrollEffect: {
 						name: 'uScrollEffect',
 						type: '1f',
 						value: 0
 					},
-					time: { name: 'uTime', type: '1f', value: 0 }
+					time: {
+						name: 'uTime',
+						type: '1f',
+						value: 0
+					}
 				}
 			});
 
@@ -66,6 +107,7 @@
 			handlePlanes(plane);
 		}
 	}
+
 	function initAnimate() {
 		animate = anime.timeline({
 			autoplay: false
@@ -105,6 +147,7 @@
 				0
 			);
 	}
+
 	function handlePlanes(plane) {
 		plane
 			.onReady(() => {
@@ -197,9 +240,10 @@
 		</p>
 		<p class="description part2">Только ваши эмоции и чувства</p>
 		<div class="description part4">
-			<p style="allign-text:center;">Дата:</p>
+			<p class="date">Дата</p>
 			<p class="date">03.10.2021г.</p>
 		</div>
+
 		<div class="whom">
 			<p class="description">Подходит для:</p>
 			<ul>
@@ -208,13 +252,39 @@
 				<li class="description2">Бизнес портретов</li>
 			</ul>
 		</div>
-		<img
-			class="where"
-			alt="SvobodinaPhoto"
-			decoding="async"
-			draggable="false"
-			src="./photoday/where.jpg"
-		/>
+		<div class="where">
+			<p class="description date">Место</p>
+			<p class="description">Фотостудия в центре города <br /> ул. Клары Цеткин 11, 4 зал</p>
+		</div>
+		<section class="price">
+			<h2 class="description date">Цены</h2>
+			<div class="price__holder">
+				{#each pricedata as el}
+					<div class="price__tarif">
+						<h3>{el.title}</h3>
+						<ul style="align-self: stretch;">
+							{#each el.body as element}
+								<li>{element}</li>
+							{/each}
+						</ul>
+						<h4 style="align-self: end;justify-self: center;">
+							Цена : {el.price}
+						</h4>
+					</div>
+				{/each}
+			</div>
+		</section>
+		<div class="contact">
+			<h2 class="description date">Контакты</h2>
+			<div class="animate__contact">
+				<div class="first">
+					<p style="transform: translateY(calc(56px * -1.2 * {trans}));">instagram.com/</p>
+					<p style="transform: translateY(calc(56px * -1.2 * {trans}));">vk.com/</p>
+					<p style="transform: translateY(calc(56px * -1.2 * {trans}));">t.me/</p>
+				</div>
+				<div class="second"><p>svobodinaphoto</p></div>
+			</div>
+		</div>
 		{#each photos as photo, index (index)}
 			<div class="plane plane{index}">
 				<img
@@ -234,16 +304,20 @@
 	:global(body) {
 		margin: 0;
 	}
+	:global(html) {
+		font-family: 'Cormorant Infant', serif;
+	}
 	:root {
 		--row__height: calc(var(--column__width) * 1.5);
 		--column__width: min(8.5vw, 140px);
 	}
 	h2 {
-		color: white;
+		/* color: white; */
 		font-size: max(32px, 8vw);
 		font-family: 'Cormorant Infant', serif;
 		font-weight: 300;
 		margin: 0;
+		text-align: center;
 	}
 	p {
 		margin: 0;
@@ -304,9 +378,8 @@
 		grid-row: 18 / 19;
 		grid-column: 1/5;
 		font-size: max(32px, 32px + 1.7vw);
-		place-self: center;
-		/* margin-top: 3vh; */
-		/* align-self: start; */
+		align-self: start;
+		transform: translateY(-30%);
 	}
 	.date {
 		font-size: max(32px, 32px + 3vw);
@@ -314,18 +387,92 @@
 	.whom {
 		grid-row: 11 / 13;
 		grid-column: 8/11;
+		transform: translateY(-30%);
+	}
+	.part4 > p {
+		text-align: center;
 	}
 	.where {
 		grid-row: 24 / 26;
-		grid-column: 6/10;
+		grid-column: 6/11;
 		height: 100%;
 		width: 100%;
 		object-fit: cover;
 		object-position: center;
 	}
+	.where > p {
+		text-align: center;
+	}
+	.price {
+		grid-row: 26 / 30;
+		grid-column: 1/11;
+		align-self: center;
+	}
+	.price__holder {
+		display: grid;
+		justify-content: center;
+		grid-template-columns: repeat(auto-fill, minmax(max(20vw, 250px), 1fr));
+		row-gap: 5vh;
+		column-gap: 2vw;
+		width: 100%;
+	}
+
+	.price__tarif {
+		position: relative;
+		display: grid;
+		grid-template-rows: 10% min(30vh 600px) 10%;
+		border-radius: 5px;
+		padding: 3vh 1vw;
+	}
+	.price__tarif > h3 {
+		font-size: 36px;
+		align-self: start;
+		justify-self: center;
+		white-space: pre-wrap;
+		text-align: center;
+	}
+	.price__tarif > ul {
+		align-self: stretch;
+		margin-top: 5vh;
+		margin-bottom: 5vh;
+	}
+	li {
+		font-size: 26px;
+		font-weight: 400;
+		/* list-style-type: '📷'; */
+		padding-inline-start: 1ch;
+	}
+	.price__tarif > h4 {
+		font-size: 36px;
+		place-self: center;
+		white-space: pre-wrap;
+	}
+	.contact {
+		grid-row: 30 / 32;
+		grid-column: 1/11;
+		height: 100%;
+		width: 100%;
+	}
+	.animate__contact {
+		font-size: 56px;
+		line-height: 1.2;
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+	}
+	.first {
+		height: calc(56px * 1.2);
+		overflow: hidden;
+	}
+	.first > p {
+		text-align: end;
+	}
+
 	.plane0 {
+		width: 100%;
+		height: 100%;
 		grid-row: 2 / 7;
 		grid-column: 2/7;
+		align-self: start;
 	}
 	.plane1 {
 		grid-row: 6 / 9;
@@ -377,12 +524,20 @@
 		grid-row: 19 / 23;
 		grid-column: 1/5;
 		justify-self: center;
-		align-self: center;
+		align-self: start;
 	}
 	.plane8 {
 		width: 90%;
 		height: 90%;
-		grid-row: 23 / 27;
+		grid-row: 22 / 26;
+		grid-column: 2/6;
+		justify-self: center;
+		align-self: center;
+	}
+	.plane9 {
+		width: 100%;
+		height: 100%;
+		grid-row: 28 / 32;
 		grid-column: 2/6;
 		justify-self: center;
 		align-self: center;
