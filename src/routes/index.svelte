@@ -4,6 +4,7 @@
 	import anime from 'animejs';
 	import vertex from '../lib/photoday.vert?raw';
 	import fragment from '../lib/photoday.frag?raw';
+	import { fly, fade } from 'svelte/transition';
 	let canvas,
 		curtains,
 		scrollEffect = 0,
@@ -12,7 +13,20 @@
 		noiseEffect = 0,
 		planes = [],
 		animate,
-		trans = 0,
+		trans = { count: 0 },
+		count = 1,
+		social = [
+			'instagram.com/svobodinaphoto',
+			'vk.com/svobodinaphoto',
+			't.me/svobodinaphoto',
+			'Позвонить'
+		],
+		link = [
+			'https://www.instagram.com/svobodinaphoto/',
+			'https://vk.com/svobodinaphoto',
+			'https://t.me/svobodinaphoto',
+			'tel:+79514616243'
+		],
 		pricedata = [
 			{
 				title: 'Первый пакет»',
@@ -202,6 +216,11 @@
 			});
 	}
 	onMount(() => {
+		let i = 4;
+		setInterval(() => {
+			i++;
+			count = i % 4;
+		}, 2500);
 		const planeElements = document.getElementsByClassName('plane');
 		initCurtains();
 		initPlane(planeElements);
@@ -227,12 +246,12 @@
 </svelte:head>
 <main>
 	<div bind:this={canvas} class="webgl" />
-	<div class="top half">
+	<!-- <div class="top half">
 		<h2>Svobodina</h2>
 	</div>
 	<div class="bottom half">
 		<h2>Photo</h2>
-	</div>
+	</div> -->
 	<div class="plane__wrapper">
 		<h1 class="main__hedlain">Фотопроект<br />"Ничего лишнего"</h1>
 		<p class="description part1">
@@ -241,7 +260,7 @@
 		<p class="description part2">Только ваши эмоции и чувства</p>
 		<div class="description part4">
 			<p class="date">Дата</p>
-			<p class="date">03.10.2021г.</p>
+			<p class="date">03.10.2021г.*</p>
 		</div>
 
 		<div class="whom">
@@ -256,35 +275,7 @@
 			<p class="description date">Место</p>
 			<p class="description">Фотостудия в центре города <br /> ул. Клары Цеткин 11, 4 зал</p>
 		</div>
-		<section class="price">
-			<h2 class="description date">Цены</h2>
-			<div class="price__holder">
-				{#each pricedata as el}
-					<div class="price__tarif">
-						<h3>{el.title}</h3>
-						<ul style="align-self: stretch;">
-							{#each el.body as element}
-								<li>{element}</li>
-							{/each}
-						</ul>
-						<h4 style="align-self: end;justify-self: center;">
-							Цена : {el.price}
-						</h4>
-					</div>
-				{/each}
-			</div>
-		</section>
-		<div class="contact">
-			<h2 class="description date">Контакты</h2>
-			<div class="animate__contact">
-				<div class="first">
-					<p style="transform: translateY(calc(56px * -1.2 * {trans}));">instagram.com/</p>
-					<p style="transform: translateY(calc(56px * -1.2 * {trans}));">vk.com/</p>
-					<p style="transform: translateY(calc(56px * -1.2 * {trans}));">t.me/</p>
-				</div>
-				<div class="second"><p>svobodinaphoto</p></div>
-			</div>
-		</div>
+
 		{#each photos as photo, index (index)}
 			<div class="plane plane{index}">
 				<img
@@ -298,11 +289,45 @@
 			</div>
 		{/each}
 	</div>
+	<section class="price">
+		<h2 class="description date">Цены</h2>
+		<div class="price__holder">
+			{#each pricedata as el}
+				<div class="price__tarif">
+					<h3>{el.title}</h3>
+					<ul style="align-self: stretch;">
+						{#each el.body as element}
+							<li>{element}</li>
+						{/each}
+					</ul>
+					<h4 style="align-self: end;justify-self: center;">
+						Цена : {el.price}
+					</h4>
+				</div>
+			{/each}
+		</div>
+	</section>
+	<div class="contact">
+		<!-- <h2 class="description date">Контакты</h2> -->
+		<a class="description3" href={link[count]} target="_blank"> <p>{social[count]}</p> </a>
+		<br />
+		<p>*Если вам не подходит дата, напишите мне, это не первый, и не последний фотопроект.</p>
+		<br />
+	</div>
 </main>
 
 <style>
 	:global(body) {
 		margin: 0;
+	}
+	a {
+		text-decoration: none;
+		color: black;
+		width: 100%;
+		text-align: right;
+	}
+	a:hover {
+		color: rgb(165, 0, 165);
 	}
 	:global(html) {
 		font-family: 'Cormorant Infant', serif;
@@ -314,10 +339,13 @@
 	h2 {
 		/* color: white; */
 		font-size: max(32px, 8vw);
-		font-family: 'Cormorant Infant', serif;
 		font-weight: 300;
 		margin: 0;
 		text-align: center;
+	}
+	h3,
+	h4 {
+		margin: 0;
 	}
 	p {
 		margin: 0;
@@ -330,17 +358,14 @@
 		display: grid;
 		grid-template-columns: 1fr 1fr;
 	}
-	/* h2 {
-		font-family: 'Roboto Slab', serif;
-	} */
-	.bottom h2 {
+	/* .bottom h2 {
 		grid-column: 2/3;
 	}
 	.top h2 {
 		justify-self: end;
 		align-self: end;
 		grid-column: 1/2;
-	}
+	} */
 	.bottom {
 		top: 50vh;
 	}
@@ -354,13 +379,15 @@
 		font-weight: 300;
 	}
 	.description {
-		font-size: max(24px, 22px + 1.5vw);
-		font-family: 'Cormorant Infant', serif;
+		font-size: max(24px, 2.7vw);
 		margin: 0;
 	}
 	.description2 {
-		font-size: max(24px, 22px + 1vw);
-		font-family: 'Cormorant Infant', serif;
+		font-size: max(20px, 2vw);
+		margin: 0;
+	}
+	.description3 {
+		font-size: max(28px, 5vw);
 		margin: 0;
 	}
 	.part1 {
@@ -382,7 +409,7 @@
 		transform: translateY(-30%);
 	}
 	.date {
-		font-size: max(32px, 32px + 3vw);
+		font-size: max(24px, 5vw);
 	}
 	.whom {
 		grid-row: 11 / 13;
@@ -411,10 +438,12 @@
 	.price__holder {
 		display: grid;
 		justify-content: center;
-		grid-template-columns: repeat(auto-fill, minmax(max(20vw, 250px), 1fr));
+		grid-template-columns: repeat(auto-fill, minmax(max(22vw, 250px), 1fr));
 		row-gap: 5vh;
-		column-gap: 2vw;
-		width: 100%;
+		column-gap: max(5px, 2vw);
+		width: min(1400px, 95vw);
+		margin: auto;
+		margin-top: 5vh;
 	}
 
 	.price__tarif {
@@ -422,10 +451,10 @@
 		display: grid;
 		grid-template-rows: 10% min(30vh 600px) 10%;
 		border-radius: 5px;
-		padding: 3vh 1vw;
+		/* padding: 3vh 1vw; */
 	}
 	.price__tarif > h3 {
-		font-size: 36px;
+		font-size: max(24px, 2.7vw);
 		align-self: start;
 		justify-self: center;
 		white-space: pre-wrap;
@@ -437,21 +466,24 @@
 		margin-bottom: 5vh;
 	}
 	li {
-		font-size: 26px;
+		font-size: max(18px, 1.5vw);
 		font-weight: 400;
 		/* list-style-type: '📷'; */
-		padding-inline-start: 1ch;
+		/* padding-inline-start: 1ch; */
 	}
 	.price__tarif > h4 {
-		font-size: 36px;
+		font-size: max(24px, 2.7vw);
 		place-self: center;
 		white-space: pre-wrap;
 	}
 	.contact {
-		grid-row: 30 / 32;
-		grid-column: 1/11;
-		height: 100%;
-		width: 100%;
+		width: 98%;
+		margin-top: 30vh;
+		margin-right: 2vw;
+	}
+	.contact > p {
+		text-align: center;
+		font-size: max(16px, 1.35vw);
 	}
 	.animate__contact {
 		font-size: 56px;
@@ -460,10 +492,12 @@
 		grid-template-columns: 1fr 1fr;
 	}
 	.first {
-		height: calc(56px * 1.2);
-		overflow: hidden;
+		position: relative;
+		/* height: calc(56px * 1.2); */
+		/* overflow: hidden; */
 	}
 	.first > p {
+		display: block;
 		text-align: end;
 	}
 
@@ -511,12 +545,8 @@
 		align-self: center;
 	}
 	.plane6 {
-		/* width: 90%;
-  height: 90%; */
 		grid-row: 18 / 23;
 		grid-column: 5/10;
-		/* justify-self: center;
-  align-self: center; */
 	}
 	.plane7 {
 		width: 70%;
@@ -557,7 +587,7 @@
 		display: grid;
 		justify-content: center;
 		grid-template-columns: repeat(10, var(--column__width));
-		grid-template-rows: 20px repeat(34, var(--row__height));
+		grid-template-rows: 20px repeat(24, var(--row__height));
 		/* grid-gap: 2vw; */
 	}
 	.plane > img {
@@ -566,5 +596,11 @@
 		width: 100%;
 		object-fit: cover;
 		object-position: center;
+	}
+	@media (max-width: 800px) {
+		.plane__wrapper {
+			display: flex;
+			justify-content: center;
+		}
 	}
 </style>
