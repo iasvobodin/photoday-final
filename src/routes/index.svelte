@@ -276,7 +276,7 @@
 			<ul>
 				<li class="description2">Семейной фотосессии</li>
 				<li class="description2">Контент съёмки для соцсетей</li>
-				<li class="description2">Бизнес портретов</li>
+				<li class="description2">Деловых портретов</li>
 			</ul>
 		</div>
 		<div class="where">
@@ -399,7 +399,7 @@
 		z-index: 2;
 	}
 	.description2 {
-		font-size: max(20px, 2vw);
+		font-size: max(22px, 2vw);
 		margin: 0;
 	}
 	.description3 {
@@ -482,7 +482,7 @@
 		margin-bottom: calc(5 * var(--vh));
 	}
 	li {
-		font-size: max(18px, 1.5vw);
+		font-size: max(22px, 1.5vw);
 		font-weight: 400;
 		/* list-style-type: '📷'; */
 		/* padding-inline-start: 1ch; */
