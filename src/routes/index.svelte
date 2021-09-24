@@ -60,14 +60,14 @@
 		],
 		photos = [
 			'2560_21-01-04-12-50-30',
-			'3',
+			'3_x1400',
 			// '2560_21-01-04-12-23-33',
 			'20-09-06-13-12-33',
 			'20-09-06-13-24-23',
 			'20-09-06-13-22-33',
 			'20-09-06-13-25-23',
 			'20-08-31-12-24-31',
-			'20-08-31-12-33-54',
+			'20-08-31-12-33-54_x1200',
 			'20-08-31-12-01-02'
 			// '20-08-31-12-16-04'
 			// '3'
@@ -128,34 +128,20 @@
 			autoplay: false
 		});
 		animate
-			.add({
-				targets: '.top',
-				translateY: '-101%',
-				easing: 'linear',
-				duration: 500
-			})
 			.add(
 				{
-					targets: '.bottom',
-					translateY: '101%',
+					targets: '.webgl',
+					scale: [1.13, 1],
+					opacity: [0, 1],
 					easing: 'linear',
-					duration: 500
+					duration: 800
 				},
 				0
 			)
 			.add(
 				{
-					targets: '.webgl',
-					scale: [1.13, 1],
-					easing: 'linear',
-					duration: 700
-				},
-				'-=300'
-			)
-			.add(
-				{
 					update: () => {
-						scrollEffect += (80 - scrollEffect) * 0.3;
+						scrollEffect += (80 - scrollEffect) * 0.9;
 					},
 					duration: 500
 				},
@@ -238,6 +224,29 @@
 </script>
 
 <svelte:head>
+	<meta name="author" content="Anastasia Svobodina" />
+	<meta name="description" content="Photoproject" />
+	<meta property="og:title" content="SvobodinaPhoto" />
+	<meta property="og:type" content="website" />
+	<meta property="og:image" content="/photoday/20-09-06-13-12-33.jpg" />
+	<meta property="og:image:type" content="image/jpeg" />
+	<meta property="og:image:width" content="300" />
+	<meta property="og:image:height" content="300" />
+	<meta property="og:url" content="https://photoproject.svobodinaphoto.com/" />
+	<meta property="og:locale" content="ru_RU" />
+	<meta property="og:description" content="The best photographer ever" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta property="twitter:domain" content="photoproject.svobodinaphoto.com" />
+	<meta property="twitter:url" content="https://photoproject.svobodinaphoto.com/" />
+	<meta name="twitter:title" content="SvobodinaPhoto" />
+	<meta name="twitter:description" content="Join me in my photo project" />
+	<meta
+		name="twitter:image"
+		content="https://photoproject.svobodinaphoto.com/photoday/20-09-06-13-12-33.jpg"
+	/>
+	<link rel="canonical" href="https://photoproject.svobodinaphoto.com/" />
+	<!-- <link rel="mask-icon" href="./favicon.svg" color=”# 000000"> -->
+	<title>Photoproject</title>
 	<link rel="preconnect" href="https://fonts.googleapis.com" />
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 	<link
@@ -256,7 +265,7 @@
 	<div class="plane__wrapper">
 		<h1 class="main__hedlain">Фотопроект<br />"Ничего лишнего"</h1>
 		<p class="description part1">
-			Фотографии на белом фоне, где главный герой "Вы", а не дизайн фотостудии
+			Фотографии на белом фоне, где главный герой вы, а не дизайн фотостудии
 		</p>
 		<p class="description part2">Только ваши эмоции и чувства</p>
 		<div class="description part4">
@@ -279,14 +288,17 @@
 
 		{#each photos as photo, index (index)}
 			<div class="plane plane{index}">
-				<img
-					data-sampler="planeTexture"
-					alt="SvobodinaPhoto"
-					crossorigin="anonimous"
-					decoding="async"
-					draggable="false"
-					src="./photoday/{photo}.webp"
-				/>
+				<picture>
+					<source srcset="./photoday/{photo}.webp" type="image/webp" />
+					<img
+						data-sampler="planeTexture"
+						alt="SvobodinaPhoto"
+						crossorigin="anonimous"
+						decoding="async"
+						draggable="false"
+						src="./photoday/{photo}.webp"
+					/>
+				</picture>
 			</div>
 		{/each}
 	</div>
@@ -312,7 +324,10 @@
 		<!-- <h2 class="description date">Контакты</h2> -->
 		<a class="description3" href={link[count]} target="_blank"> <p>{social[count]}</p> </a>
 		<br />
-		<p>*Если вам не подходит дата, напишите мне, это не первый, и не последний фотопроект.</p>
+		<p>
+			*Если вам не подошла дата или время - не расстраивайтесь и всё равно напишите мне, думаю мы
+			обязательно сделаем повтор, и тогда я напишу вам в первую очередь.
+		</p>
 		<br />
 	</div>
 </main>
@@ -334,6 +349,7 @@
 		font-family: 'Cormorant Infant', serif;
 	}
 	:root {
+		--vh: 1vh;
 		--row__height: calc(var(--column__width) * 1.5);
 		--column__width: min(8.5vw, 140px);
 	}
@@ -354,7 +370,7 @@
 	.half {
 		background-color: black;
 		width: 100%;
-		height: 50vh;
+		height: calc(50 * var(--vh));
 		position: fixed;
 		display: grid;
 		grid-template-columns: 1fr 1fr;
@@ -368,7 +384,7 @@
 		grid-column: 1/2;
 	} */
 	.bottom {
-		top: 50vh;
+		top: calc(50 * var(--vh));
 	}
 	.main__hedlain {
 		margin: 0;
@@ -400,7 +416,7 @@
 	.part2 {
 		grid-row: 9 / 10;
 		grid-column: 6/11;
-		margin-top: 3vh;
+		margin-top: calc(3 * var(--vh));
 		align-self: start;
 	}
 	.part4 {
@@ -441,19 +457,19 @@
 		display: grid;
 		justify-content: center;
 		grid-template-columns: repeat(auto-fit, minmax(max(22vw, 250px), 1fr));
-		row-gap: 5vh;
+		row-gap: calc(5 * var(--vh));
 		column-gap: max(5px, 2vw);
 		width: min(1400px, 95vw);
 		margin: auto;
-		margin-top: 5vh;
+		margin-top: calc(5 * var(--vh));
 	}
 
 	.price__tarif {
 		position: relative;
 		display: grid;
-		grid-template-rows: 10% min(30vh 600px) 10%;
+		grid-template-rows: 10% min(calc(30 * var(--vh)) 600px) 10%;
 		border-radius: 5px;
-		/* padding: 3vh 1vw; */
+		/* padding:calc( 3 * var(--vh)) 1vw; */
 	}
 	.price__tarif > h3 {
 		font-size: max(24px, 2.7vw);
@@ -464,8 +480,8 @@
 	}
 	.price__tarif > ul {
 		align-self: stretch;
-		margin-top: 5vh;
-		margin-bottom: 5vh;
+		margin-top: calc(5 * var(--vh));
+		margin-bottom: calc(5 * var(--vh));
 	}
 	li {
 		font-size: max(18px, 1.5vw);
@@ -480,7 +496,7 @@
 	}
 	.contact {
 		width: 98%;
-		margin-top: 30vh;
+		margin-top: calc(30 * var(--vh));
 		margin-right: 2vw;
 	}
 	.contact > p {
@@ -593,7 +609,7 @@
 		/* background-color: #aeb4b8; */
 		/* grid-gap: 2vw; */
 	}
-	.plane > img {
+	.plane > picture > img {
 		display: none;
 		height: 100%;
 		width: 100%;
@@ -681,28 +697,28 @@
 			grid-column: 1/2;
 			grid-row: 1/2;
 			text-align: center;
-			margin-top: 2vh;
+			margin-top: calc(2 * var(--vh));
 		}
 		.part1 {
 			grid-row: 3/4;
 			grid-column: auto;
 			align-self: center;
-			/* height: 30vh; */
-			margin-top: 10vh;
-			margin-bottom: 10vh;
-			padding: 1vh;
+			/* height: calc(30 * var(--vh)); */
+			margin-top: calc(10 * var(--vh));
+			margin-bottom: calc(10 * var(--vh));
+			padding: calc(1 * var(--vh));
 		}
 		.part2 {
 			grid-row: 5/6;
 			grid-column: auto;
-			padding: 1vh;
+			padding: calc(1 * var(--vh));
 			align-self: start;
-			margin-bottom: 5vh;
+			margin-bottom: calc(5 * var(--vh));
 		}
 		.part4 {
 			grid-row: 7/8;
 			grid-column: auto;
-			margin: 5vh 0;
+			margin: calc(5 * var(--vh)) 0;
 			align-self: start;
 			/* transform: translateY(-30%); */
 		}
@@ -713,7 +729,7 @@
 			grid-row: 9/10;
 			grid-column: auto;
 			transform: translateY(0%);
-			margin: 5vh 0;
+			margin: calc(5 * var(--vh)) 0;
 		}
 		.where {
 			grid-row: 11/12;
@@ -722,7 +738,7 @@
 			width: 100%;
 			object-fit: cover;
 			object-position: center;
-			margin: 5vh 0;
+			margin: calc(5 * var(--vh)) 0;
 		}
 		.date {
 			font-size: 36px;
