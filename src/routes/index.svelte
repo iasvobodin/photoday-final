@@ -230,8 +230,8 @@
 	<meta property="og:type" content="website" />
 	<meta property="og:image" content="/photoday/cover.jpg" />
 	<meta property="og:image:type" content="image/jpeg" />
-	<meta property="og:image:width" content="300" />
-	<meta property="og:image:height" content="300" />
+	<meta property="og:image:width" content="600" />
+	<meta property="og:image:height" content="307" />
 	<meta property="og:url" content="https://photoproject.svobodinaphoto.com/" />
 	<meta property="og:locale" content="ru_RU" />
 	<meta property="og:description" content="The best photographer ever" />
