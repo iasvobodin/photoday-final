@@ -174,6 +174,7 @@
 	function initCurtains() {
 		curtains = new Curtains({
 			container: canvas,
+			production: true,
 			pixelRatio: Math.min(1.5, window.devicePixelRatio)
 		});
 
