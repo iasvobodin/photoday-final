@@ -228,7 +228,7 @@
 	<meta name="description" content="Photoproject" />
 	<meta property="og:title" content="SvobodinaPhoto" />
 	<meta property="og:type" content="website" />
-	<meta property="og:image" content="/photoday/20-09-06-13-12-33.jpg" />
+	<meta property="og:image" content="/photoday/cover.jpg" />
 	<meta property="og:image:type" content="image/jpeg" />
 	<meta property="og:image:width" content="300" />
 	<meta property="og:image:height" content="300" />
@@ -239,11 +239,8 @@
 	<meta property="twitter:domain" content="photoproject.svobodinaphoto.com" />
 	<meta property="twitter:url" content="https://photoproject.svobodinaphoto.com/" />
 	<meta name="twitter:title" content="SvobodinaPhoto" />
-	<meta name="twitter:description" content="Join me in my photo project" />
-	<meta
-		name="twitter:image"
-		content="https://photoproject.svobodinaphoto.com/photoday/20-09-06-13-12-33.jpg"
-	/>
+	<meta name="twitter:description" content="Join my photoproject" />
+	<meta name="twitter:image" content="https://photoproject.svobodinaphoto.com/photoday/cover.jpg" />
 	<link rel="canonical" href="https://photoproject.svobodinaphoto.com/" />
 	<!-- <link rel="mask-icon" href="./favicon.svg" color=”# 000000"> -->
 	<title>Photoproject</title>
