@@ -60,7 +60,8 @@
 		],
 		photos = [
 			'2560_21-01-04-12-50-30',
-			'2560_21-01-04-12-23-33',
+			'3',
+			// '2560_21-01-04-12-23-33',
 			'20-09-06-13-12-33',
 			'20-09-06-13-24-23',
 			'20-09-06-13-22-33',
@@ -388,7 +389,7 @@
 		margin: 0;
 	}
 	.description3 {
-		font-size: max(28px, 5vw);
+		font-size: max(24px, 5vw);
 		margin: 0;
 	}
 	.part1 {
@@ -589,6 +590,7 @@
 		justify-content: center;
 		grid-template-columns: repeat(10, var(--column__width));
 		grid-template-rows: 20px repeat(24, var(--row__height));
+		/* background-color: #aeb4b8; */
 		/* grid-gap: 2vw; */
 	}
 	.plane > img {
@@ -619,6 +621,9 @@
 			grid-row: 4/5;
 			grid-column: auto;
 			place-self: center;
+		}
+		.plane1,
+		.plane3 {
 			width: 70vw;
 			height: calc(70vw * 1.6);
 		}
@@ -629,13 +634,13 @@
 			grid-column: auto;
 		}
 		.plane3 {
-			grid-row: auto;
+			grid-row: 8/9;
 			grid-column: auto;
 			justify-self: center;
-			align-self: end;
+			align-self: center;
 		}
 		.plane4 {
-			grid-row: auto;
+			grid-row: 10/11;
 			grid-column: auto;
 			justify-self: center;
 			align-self: center;
@@ -649,24 +654,28 @@
 		.plane6 {
 			grid-row: auto;
 			grid-column: auto;
+			display: none;
 		}
 		.plane7 {
 			grid-row: auto;
 			grid-column: auto;
 			justify-self: center;
 			align-self: start;
+			display: none;
 		}
 		.plane8 {
 			grid-row: auto;
 			grid-column: auto;
 			justify-self: center;
 			align-self: center;
+			display: none;
 		}
 		.plane9 {
 			grid-row: auto;
 			grid-column: auto;
 			justify-self: center;
 			align-self: center;
+			display: none;
 		}
 		.main__hedlain {
 			grid-column: 1/2;
@@ -686,28 +695,37 @@
 		.part2 {
 			grid-row: 5/6;
 			grid-column: auto;
+			padding: 1vh;
 			align-self: start;
 			margin-bottom: 5vh;
 		}
 		.part4 {
 			grid-row: 7/8;
 			grid-column: auto;
-			/* font-size: max(32px, 32px + 1.7vw); */
+			margin: 5vh 0;
 			align-self: start;
 			/* transform: translateY(-30%); */
 		}
+		.part4 > p {
+			font-size: max(52px, 32px + 1.7vw);
+		}
 		.whom {
-			grid-row: auto;
+			grid-row: 9/10;
 			grid-column: auto;
-			transform: translateY(-30%);
+			transform: translateY(0%);
+			margin: 5vh 0;
 		}
 		.where {
-			grid-row: auto;
+			grid-row: 11/12;
 			grid-column: auto;
 			height: 100%;
 			width: 100%;
 			object-fit: cover;
 			object-position: center;
+			margin: 5vh 0;
+		}
+		.date {
+			font-size: 36px;
 		}
 	}
 </style>
