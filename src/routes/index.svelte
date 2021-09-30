@@ -245,12 +245,12 @@
 	<link rel="canonical" href="https://photoproject.svobodinaphoto.com/" />
 	<!-- <link rel="mask-icon" href="./favicon.svg" color=”# 000000"> -->
 	<title>Photoproject</title>
-	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<!-- <link rel="preconnect" href="https://fonts.googleapis.com" />
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 	<link
 		href="https://fonts.googleapis.com/css2?family=Cormorant+Infant:wght@300&display=swap"
 		rel="stylesheet"
-	/>
+	/> -->
 </svelte:head>
 <main>
 	<div bind:this={canvas} class="webgl" />
@@ -331,6 +331,14 @@
 </main>
 
 <style>
+	@font-face {
+		font-family: 'Cormorant Infant';
+		font-style: normal;
+		font-weight: 300;
+		src: local(''), url('/fonts/cormorant-infant-v11-cyrillic-300.woff2') format('woff2'),
+			/* Chrome 26+, Opera 23+, Firefox 39+ */ url('/fonts/cormorant-infant-v11-cyrillic-300.woff')
+				format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+	}
 	:global(body) {
 		margin: 0;
 	}
