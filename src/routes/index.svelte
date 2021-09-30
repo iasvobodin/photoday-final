@@ -276,7 +276,7 @@
 			<ul>
 				<li class="description2">Семейной фотосессии</li>
 				<li class="description2">Контент съёмки для соцсетей</li>
-				<li class="description2">Деловых портретов</li>
+				<li class="description2">Портретов</li>
 			</ul>
 		</div>
 		<div class="where">
