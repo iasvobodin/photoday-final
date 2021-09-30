@@ -336,8 +336,8 @@
 		font-style: normal;
 		font-weight: 300;
 		src: local(''), url('/fonts/cormorant-infant-v11-cyrillic-300.woff2') format('woff2'),
-			/* Chrome 26+, Opera 23+, Firefox 39+ */ url('/fonts/cormorant-infant-v11-cyrillic-300.woff')
-				format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+		url('/fonts/cormorant-infant-v11-cyrillic-300.woff') format('woff');
+		font-display: swap;
 	}
 	:global(body) {
 		margin: 0;
