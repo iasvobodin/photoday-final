@@ -320,7 +320,7 @@
 	</section>
 	<div class="contact">
 		<!-- <h2 class="description date">Контакты</h2> -->
-		<a class="description3" href={link[count]} target="_blank"> <p>{social[count]}</p> </a>
+		<a class="description3" href={link[count]} rel="noopener" target="_blank"> <p>{social[count]}</p> </a>
 		<br />
 		<p>
 			*Если вам не подошла дата или время - не расстраивайтесь и всё равно напишите мне, думаю мы
