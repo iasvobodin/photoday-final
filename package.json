@@ -11,16 +11,16 @@
   "devDependencies": {
     "@sveltejs/adapter-static": "^1.0.0-next.19",
     "@sveltejs/kit": "next",
-    "eslint": "^7.32.0",
+    "eslint": "^8.1.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-svelte3": "^3.2.1",
     "prettier": "^2.4.1",
     "prettier-plugin-svelte": "^2.4.0",
-    "svelte": "^3.42.6"
+    "svelte": "^3.44.0"
   },
   "type": "module",
   "dependencies": {
     "animejs": "^3.2.1",
-    "curtainsjs": "^8.1.2"
+    "curtainsjs": "^8.1.3"
   }
 }

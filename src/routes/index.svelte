@@ -2,8 +2,12 @@
 	import { Curtains, TextureLoader, Plane, Vec3 } from 'curtainsjs/src/index.mjs';
 	import { onMount } from 'svelte';
 	import anime from 'animejs';
-	import vertex from '../lib/photoday.vert?raw';
-	import fragment from '../lib/photoday.frag?raw';
+	import vertex from '$lib/photoday.vert?raw';
+	import fragment from '$lib/photoday.frag?raw';
+	import vs from '$lib/fstext.frag?raw';
+	import fs from '$lib/vstext.vert?raw';
+	import scrollFs from '$lib/fsscroll.frag?raw';
+	import { TextTexture } from '$lib/tt.js';
 	import { fly, fade } from 'svelte/transition';
 	let canvas,
 		curtains,
@@ -82,7 +86,7 @@
 				widthSegments: 16,
 				heightSegments: 16,
 				//   autoloadSources: false,
-				fov: 75,
+				fov: 95,
 				alwaysDraw: false,
 				shareProgram: true,
 				texturesOptions: {
@@ -209,6 +213,7 @@
 			i++;
 			count = i % 4;
 		}, 2500);
+		// curtains.onSuccess(() => {
 		const planeElements = document.getElementsByClassName('plane');
 		initCurtains();
 		initPlane(planeElements);
@@ -217,14 +222,16 @@
 		planes[1].setRelativeTranslation(frontPlane);
 		planes[3].setRelativeTranslation(frontPlane);
 		planes[8].setRelativeTranslation(frontPlane);
+		planes[7].setRelativeTranslation(frontPlane);
 		const rearPlane = new Vec3(0, 0, -80);
 		planes[0].setRelativeTranslation(rearPlane);
 		planes[2].setRelativeTranslation(rearPlane);
-		planes[7].setRelativeTranslation(frontPlane);
+		// });
 	});
 </script>
 
 <svelte:head>
+	<title>Photoproject</title>
 	<meta name="author" content="Anastasia Svobodina" />
 	<meta name="description" content="Photoproject" />
 	<meta property="og:title" content="SvobodinaPhoto" />
@@ -243,14 +250,6 @@
 	<meta name="twitter:description" content="Join my photoproject" />
 	<meta name="twitter:image" content="https://photoproject.svobodinaphoto.com/photoday/cover.jpg" />
 	<link rel="canonical" href="https://photoproject.svobodinaphoto.com/" />
-	<!-- <link rel="mask-icon" href="./favicon.svg" color=”# 000000"> -->
-	<title>Photoproject</title>
-	<!-- <link rel="preconnect" href="https://fonts.googleapis.com" />
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-	<link
-		href="https://fonts.googleapis.com/css2?family=Cormorant+Infant:wght@300&display=swap"
-		rel="stylesheet"
-	/> -->
 </svelte:head>
 <main>
 	<div bind:this={canvas} class="webgl" />
@@ -320,7 +319,9 @@
 	</section>
 	<div class="contact">
 		<!-- <h2 class="description date">Контакты</h2> -->
-		<a class="description3" href={link[count]} rel="noopener" target="_blank"> <p>{social[count]}</p> </a>
+		<a class="description3" href={link[count]} rel="noopener" target="_blank">
+			<p>{social[count]}</p>
+		</a>
 		<br />
 		<p>
 			*Если вам не подошла дата или время - не расстраивайтесь и всё равно напишите мне, думаю мы
@@ -336,7 +337,7 @@
 		font-style: normal;
 		font-weight: 300;
 		src: local(''), url('/fonts/cormorant-infant-v11-cyrillic-300.woff2') format('woff2'),
-		url('/fonts/cormorant-infant-v11-cyrillic-300.woff') format('woff');
+			url('/fonts/cormorant-infant-v11-cyrillic-300.woff') format('woff');
 		font-display: swap;
 	}
 	:global(body) {
