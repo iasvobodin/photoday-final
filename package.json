@@ -9,18 +9,18 @@
     "format": "prettier --ignore-path .gitignore --write --plugin-search-dir=. ."
   },
   "devDependencies": {
-    "@sveltejs/adapter-static": "^1.0.0-next.19",
+    "@sveltejs/adapter-static": "^1.0.0-next.26",
     "@sveltejs/kit": "next",
-    "eslint": "^7.32.0",
+    "eslint": "^8.6.0",
     "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-svelte3": "^3.2.1",
-    "prettier": "^2.4.1",
-    "prettier-plugin-svelte": "^2.4.0",
-    "svelte": "^3.42.6"
+    "eslint-plugin-svelte3": "^3.3.0",
+    "prettier": "^2.5.1",
+    "prettier-plugin-svelte": "^2.5.1",
+    "svelte": "^3.46.0"
   },
   "type": "module",
   "dependencies": {
     "animejs": "^3.2.1",
-    "curtainsjs": "^8.1.2"
+    "curtainsjs": "^8.1.3"
   }
 }
