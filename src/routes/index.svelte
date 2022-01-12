@@ -332,6 +332,15 @@
 				/>
 			</picture>
 		</div>
+
+		<div class="buttons">
+			<div class="button" />
+			<div class="button" />
+			<div class="button" />
+			<div class="button" />
+			<div class="button" />
+			<div class="button" />
+		</div>
 		<div class="sliderdescription">
 			<h1>Slider</h1>
 			<!-- <p>Lorem ipsum dolor sit amet.</p> -->
@@ -354,7 +363,7 @@
 	}
 	.content {
 		min-height: 100vh;
-		border: 1px solid pink;
+		/* border: 1px solid pink; */
 		display: grid;
 	}
 	.first {
@@ -418,5 +427,22 @@
 	}
 	.sliderdescription {
 		text-align: center;
+	}
+	.fourth {
+		grid-template-rows: 80vh 5vh 15vh;
+	}
+	.buttons {
+		width: 100%;
+		display: grid;
+		grid-auto-flow: column;
+	}
+	.button {
+		cursor: pointer;
+		border: 2px solid #e6bdc9;
+		place-self: center;
+		width: 15px;
+		height: 15px;
+		border-radius: 50%;
+		background-color: #a2ab54;
 	}
 </style>
