@@ -269,8 +269,8 @@
 			</picture>
 		</div>
 		<div class="header">
-			<h1>Title</h1>
-			<p>Lorem ipsum dolor sit amet.</p>
+			<h1>Фотороект с цветами</h1>
+			<p>Таких фотографий у тебя точно небыло.</p>
 		</div>
 	</section>
 	<section class=" content second">
@@ -288,33 +288,53 @@
 			</picture>
 		</div>
 		<div class="decsription">
-			<h2>Title</h2>
-			<p>
-				<b>
-					Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aliquid dignissimos totam, quas,
-					dolor molestias adipisci eveniet ex ipsa quod sequi tempore sapiente facere eligendi
-					<br /><br />
-					placeat cupiditate voluptatum, explicabo accusamus quasi quia delectus eaque voluptas quibusdam?
-				</b>
-			</p>
+			<!-- <h2>Title</h2> -->
+			<ul>
+				<li>
+					<p>29.01 c 14 до 16 (уточнить свободные места)</p>
+				</li>
+				<li>
+					<p>новая фотостудия в центре города</p>
+				</li>
+				<li>
+					<p>работа фотографа, аренда студии, и весь реквизит уже включены в стоимость</p>
+				</li>
+			</ul>
+			<p>узнать цены</p>
 		</div>
 	</section>
 	<section class=" content third">
 		<div class="price">
-			<h2>Lorem ipsum dolor sit amet consectetur.</h2>
+			<h2>На этом фотопроекте доступно два тарифа</h2>
 		</div>
 		<div class="table">
 			<div class="ff">
-				<p>
-					Lorem ipsum, dolor sit amet consectetur adipisicing elit. Error, ab perferendis
-					repellendus magnam nemo aliquid.
-				</p>
+				<h3>Тариф Mini</h3>
+				<ul>
+					<li>
+						<p>7 фото в цветокоррекции и ретуши</p>
+					</li>
+					<li>
+						<p>срок обработки 7 дней</p>
+					</li>
+					<li>
+						<p>цена 2700р</p>
+					</li>
+				</ul>
 			</div>
 			<div class="ss">
-				<p>
-					Lorem ipsum, dolor sit amet consectetur adipisicing elit. Blanditiis dolores labore
-					eveniet, ad accusamus corporis.
-				</p>
+				<h3>Тариф Standart</h3>
+				<ul>
+					<li>
+						<p>15 фото в цветокоррекции и ретуши</p>
+					</li>
+					<li>
+						<p>срок обработки 14 дней</p>
+					</li>
+					<li>
+						<p>цена 3200р</p>
+					</li>
+				</ul>
 			</div>
 		</div>
 	</section>
@@ -426,7 +446,7 @@
 	}
 	.ff,
 	.ss {
-		padding: 10px 3vh;
+		padding: 10px 0.5vh;
 	}
 	.price {
 		place-self: center;
