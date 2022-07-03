@@ -13,6 +13,7 @@
 		noiseFreq = 0.9,
 		noiseAmp = 0.04,
 		noiseEffect = 0,
+		wholeWidth,
 		planes = [],
 		animate,
 		trans = { count: 0 },
@@ -118,7 +119,6 @@
 					}
 				}
 			});
-
 			planes.push(plane);
 
 			handlePlanes(plane);
@@ -154,9 +154,11 @@
 	function handlePlanes(plane) {
 		plane
 			.onReady(() => {
+				console.log(plane.relativeTranslation.x);
+				console.log(plane.getWebGLBoundingRect().width, 'webjl');
+				console.log(plane.getBoundingRect().width, 'bound');
 				if (plane.index === planes.length - 1) {
 					document.body.classList.add('planes-loaded');
-
 					animate.play();
 				}
 			})
@@ -173,7 +175,13 @@
 				// )
 			});
 	}
-	function 
+	function calcPos(scr, pos) {
+		let temp =
+			(scr + planes[0].getWebGLBoundingRect().width * photos.length) %
+			(planes[0].getWebGLBoundingRect().width * photos.length);
+
+		return temp;
+	}
 
 	function initCurtains() {
 		curtains = new Curtains({
@@ -186,7 +194,10 @@
 			.onRender(() => {
 				scrollEffect = curtains.lerp(scrollEffect, 0, 0.035);
 				planes.forEach((pl) => {
-					pl.setRelativeTranslation(new Vec3(scrollPos * 0.5, 0, 0));
+					// console.log(pl.relativeTranslation.x, pl.index);
+					pl.setRelativeTranslation(
+						new Vec3(calcPos(scrollPos, pl.relativeTranslation.x) * 0.5, 0, 0)
+					);
 					// pl.setRelativeTranslation.x += scrollPos;
 				});
 			})
@@ -229,7 +240,7 @@
 		//   sliderState.endPosition = sliderState.currentPosition;
 		//   onChangeTitle(sliderState.currentPosition, e);
 		// }
-		console.log(scrollPos);
+		// console.log(scrollPos);
 	}
 
 	onMount(() => {
