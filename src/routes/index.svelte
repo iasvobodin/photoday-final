@@ -15,64 +15,21 @@
 		noiseEffect = 0,
 		planes = [],
 		animate,
-		trans = { count: 0 },
+		planeWidth,
 		count = 1,
-		social = [
-			'instagram.com/svobodinaphoto',
-			'vk.com/svobodinaphoto',
-			't.me/svobodinaphoto',
-			'Позвонить'
-		],
-		link = [
-			'https://www.instagram.com/svobodinaphoto/',
-			'https://vk.com/svobodinaphoto',
-			'https://t.me/svobodinaphoto',
-			'tel:+79514616243'
-		],
-		pricedata = [
-			{
-				title: 'Первый пакет»',
-				body: [
-					'Съемка 40 минут',
-					' 15 фотографий с цветокоррекцией и ретушью, где она необходима',
-					'Срок отдачи: 2 недели'
-				],
-				price: '2.000р.'
-			},
-			{
-				title: 'Второй пакет»',
-				body: [
-					'Съемка 40 минут',
-					' 25 фотографий с цветокоррекцией и ретушью, где она необходима',
-					'Макияж от профессионального визажиста',
-					'Срок отдачи: 2 недели'
-				],
-				price: '3.700р.'
-			},
-			{
-				title: 'Третий пакет»',
-				body: [
-					'Съемка 40 минут',
-					' 40-50 фотографий с цветокоррекцией и ретушью, где она необходима',
-					'Макияж от профессионального визажиста',
-					'Срок отдачи: 1 неделя'
-				],
-				price: '4.500р.'
-			}
-		],
 		photos = [
-			'2560_21-01-04-12-50-30',
-			'3_x1400',
-			// '2560_21-01-04-12-23-33',
+			// '2560_21-01-04-12-50-30',
+			// '3_x1400',
+			'2560_21-01-04-12-23-33',
 			'20-09-06-13-12-33',
 			'20-09-06-13-24-23',
 			'20-09-06-13-22-33',
 			'20-09-06-13-25-23',
 			'20-08-31-12-24-31',
-			'20-08-31-12-33-54_x1200',
-			'20-08-31-12-01-02'
-			// '20-08-31-12-16-04'
-			// '3'
+			// '20-08-31-12-33-54_x1200',
+			'20-08-31-12-01-02',
+			// '20-08-31-12-16-04',
+			'3'
 		];
 	// ==========================
 
@@ -154,27 +111,35 @@
 	function handlePlanes(plane) {
 		plane
 			.onReady(() => {
+				// plane.relativeTranslation.x = plane.getBoundingRect().width * plane.index;
 				if (plane.index === planes.length - 1) {
+					planeWidth = plane.getBoundingRect().width;
+					console.log(planeWidth);
 					document.body.classList.add('planes-loaded');
 
-					animate.play();
+					// animate.play();
 				}
 			})
 			.onRender(() => {
-				noiseEffect += scrollEffect / 45000;
-				plane.uniforms.time.value += 0.01;
-				plane.uniforms.scrollEffect.value = scrollEffect / 100;
-				plane.uniforms.noiseEffect.value = noiseEffect;
-
-				// scale plane and its texture
-				// plane.setScale(new Vec2(1, 1 + Math.abs(this.scrollEffect) / 1500))
-				// plane.textures[0].setScale(
-				//   new Vec2(1, 1 + Math.abs(this.scrollEffect) / 1550)
-				// )
+				// noiseEffect += scrollEffect / 45000;
+				// plane.uniforms.time.value += 0.01;
+				// plane.uniforms.scrollEffect.value = scrollEffect / 100;
+				// plane.uniforms.noiseEffect.value = noiseEffect;
+				// // scale plane and its texture
+				// // plane.setScale(new Vec2(1, 1 + Math.abs(this.scrollEffect) / 1500))
+				// // plane.textures[0].setScale(
+				// //   new Vec2(1, 1 + Math.abs(this.scrollEffect) / 1550)
+				// // )
 			});
 	}
-	function 
+	console.log(2 % 13);
 
+	function infin(scroll, pos, rp) {
+		const WHOLE = planeWidth * photos.length;
+		let temp = ((scroll + pos + planeWidth) % WHOLE) - planeWidth;
+
+		return temp;
+	}
 	function initCurtains() {
 		curtains = new Curtains({
 			container: canvas,
@@ -184,26 +149,32 @@
 
 		curtains
 			.onRender(() => {
-				scrollEffect = curtains.lerp(scrollEffect, 0, 0.035);
-				planes.forEach((pl) => {
-					pl.setRelativeTranslation(new Vec3(scrollPos * 0.5, 0, 0));
-					// pl.setRelativeTranslation.x += scrollPos;
+				// console.log(planes[0].relativeTranslation.x);
+				// scrollEffect = curtains.lerp(scrollEffect, 0, 0.035);
+				planes.forEach((pl, i) => {
+					pl.setRelativeTranslation(new Vec3(scrollPos, 0, 0)); //infin(planeWidth * i, scrollPos * 0.5), 0, 0));
+					// pl.relativeTranslation.x += scrollPos * 0.5;
+					// pl.relativeTranslation.x = infin(
+					// 	planeWidth * i,
+					// 	scrollPos * 0.5,
+					// 	pl.relativeTranslation.x
+					// );
 				});
 			})
-			.onScroll(() => {
-				const delta = curtains.getScrollDeltas();
-				delta.y = -delta.y;
-				// threshold
-				if (delta.y > 95) {
-					delta.y = 95;
-				} else if (delta.y < -95) {
-					delta.y = -95;
-				}
+			// .onScroll(() => {
+			// 	const delta = curtains.getScrollDeltas();
+			// 	delta.y = -delta.y;
+			// 	// threshold
+			// 	if (delta.y > 95) {
+			// 		delta.y = 95;
+			// 	} else if (delta.y < -95) {
+			// 		delta.y = -95;
+			// 	}
 
-				if (Math.abs(delta.y) > Math.abs(scrollEffect)) {
-					scrollEffect = curtains.lerp(scrollEffect, delta.y, 0.5);
-				}
-			})
+			// 	if (Math.abs(delta.y) > Math.abs(scrollEffect)) {
+			// 		scrollEffect = curtains.lerp(scrollEffect, delta.y, 0.5);
+			// 	}
+			// })
 			.onError(() => {
 				document.body.classList.add('no-curtains', 'planes-loaded');
 			})
@@ -225,31 +196,25 @@
 			}
 		}
 		const delta = window.navigator.userAgent.includes('Firefox') ? e.deltaY * 33 : e.deltaY;
-		!isTrackpad ? (scrollPos += e.deltaY * -1) : (scrollPos += delta * -1);
+		!isTrackpad ? (scrollPos += e.deltaY * -1) / 2 : (scrollPos += delta * -1) / 2;
 		//   sliderState.endPosition = sliderState.currentPosition;
 		//   onChangeTitle(sliderState.currentPosition, e);
 		// }
-		console.log(scrollPos);
+		console.log(planes.at(-1).relativeTranslation.x); // % (planeWidth * photos.length), 'last');
+		console.log(planes[0].relativeTranslation.x); // % (planeWidth * photos.length), 'first');
+		// planes.forEach((pl, i) => {
+		// 	console.log(pl.relativeTranslation.x, i);
+		// 	// pl.relativeTranslation.x += scrollPos;
+		// 	// pl.relativeTranslation.x += scrollPos * 0.5;
+		// 	// pl.setRelativeTranslation.x += scrollPos;
+		// });
 	}
 
 	onMount(() => {
-		let i = 4;
-		setInterval(() => {
-			i++;
-			count = i % 4;
-		}, 2500);
 		const planeElements = document.getElementsByClassName('plane');
 		initCurtains();
 		initPlane(planeElements);
-		initAnimate();
-		// const frontPlane = new Vec3(0, 0, 80);
-		// planes[1].setRelativeTranslation(frontPlane);
-		// planes[3].setRelativeTranslation(frontPlane);
-		// planes[8].setRelativeTranslation(frontPlane);
-		// const rearPlane = new Vec3(0, 0, -80);
-		// planes[0].setRelativeTranslation(rearPlane);
-		// planes[2].setRelativeTranslation(rearPlane);
-		// planes[7].setRelativeTranslation(frontPlane);
+		// initAnimate();
 	});
 </script>
 
@@ -342,12 +307,11 @@
 		grid-auto-flow: column;
 		grid-auto-columns: calc(50vh * 0.66);
 		align-content: center;
-		/* grid-template-columns: repeat(10, var(--column__width)); */
-		/* grid-template-rows: 20px repeat(24, var(--row__height)); */
-		/* background-color: #aeb4b8; */
-		/* grid-gap: 2vw; */
 	}
 	.plane {
+		/* position: absolute;
+		top: 25vh;
+		left: 0; */
 		height: 50vh;
 		width: calc(50vh * 0.66);
 	}
