@@ -13,6 +13,7 @@
 		noiseFreq = 0.9,
 		noiseAmp = 0.04,
 		noiseEffect = 0,
+		wholeWidth,
 		planes = [],
 		animate,
 		planeWidth,
@@ -75,7 +76,6 @@
 					}
 				}
 			});
-
 			planes.push(plane);
 
 			handlePlanes(plane);
